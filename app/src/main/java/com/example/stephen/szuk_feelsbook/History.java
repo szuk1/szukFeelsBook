@@ -31,6 +31,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -108,6 +109,7 @@ public class History extends AppCompatActivity {
             ArrayList<Emotion> tempArray;
             tempArray = gson.fromJson(in, listType);
             elc.setEmotionList(tempArray);
+            Collections.sort(EmotionListController.getEmotionList());
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
 
@@ -183,6 +185,7 @@ public class History extends AppCompatActivity {
                 String newdateString = DateEditText.getText().toString();
                 LocalDateTime newdate = LocalDateTime.parse(newdateString, ISO_LOCAL_DATE_TIME);
                 emotionfinal.setDate(newdate);
+                Collections.sort(EmotionListController.getEmotionList());
                 saveInFile();
             }
         });

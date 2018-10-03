@@ -3,7 +3,7 @@ package com.example.stephen.szuk_feelsbook;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Emotion {
+public class Emotion implements Comparable<Emotion> {
     private String emotionType;
     private LocalDateTime date;
     private String Comment;
@@ -37,6 +37,10 @@ public class Emotion {
 
     public void setType(String emotionType){
         this.emotionType = emotionType;
+    }
+
+    public int compareTo(Emotion a) {
+        return this.getDate().compareTo(a.getDate());
     }
 
 
