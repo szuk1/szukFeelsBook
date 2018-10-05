@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EmotionCount extends AppCompatActivity {
     private static final String FILENAME = "file7.sav";
@@ -38,47 +39,25 @@ public class EmotionCount extends AppCompatActivity {
         TextView SadnessCountTV = (TextView)findViewById(R.id.SadnessCount);
         TextView FearCountTV = (TextView)findViewById(R.id.FearCount);
         TextView TotalCountTV = (TextView)findViewById(R.id.TotalEmotionCount);
-        int LoveCount = 0;
-        int JoyCount = 0;
-        int SurpriseCount = 0;
-        int AngerCount = 0;
-        int SadnessCount = 0;
-        int FearCount = 0;
-        int TotalCount = 0;
+        HashMap<String,Integer> map = new HashMap<String, Integer>();
+        int totalcount = 0;
 
-        for (Emotion emotion: CountArray){
-            if (emotion.getType().equals("Love")) {
-                LoveCount +=1;
-                TotalCount +=1;
-            }
-            else if (emotion.getType().equals("Joy")) {
-                JoyCount +=1;
-                TotalCount +=1;
-            }
-            else if (emotion.getType().equals("Surprise")) {
-                SurpriseCount +=1;
-                TotalCount +=1;
-            }
-            else if (emotion.getType().equals("Anger")) {
-                AngerCount +=1;
-                TotalCount +=1;
-            }
-            else if (emotion.getType().equals("Sadness")) {
-                SadnessCount +=1;
-                TotalCount +=1;
-            }
-            else {
-                FearCount +=1;
-                TotalCount +=1;
-            }
-            LoveCountTV.setText(String.valueOf(LoveCount));
-            JoyCountTV.setText(String.valueOf(JoyCount));
-            SurpriseCountTV.setText(String.valueOf(SurpriseCount));
-            AngerCountTV.setText(String.valueOf(AngerCount));
-            SadnessCountTV.setText(String.valueOf(SadnessCount));
-            FearCountTV.setText(String.valueOf(FearCount));
-            TotalCountTV.setText(String.valueOf(TotalCount));
+
+
+        for (Emotion emotion: CountArray) {
+            String emotiontype = emotion.getType();
+            map.put(emotiontype, 1 + map.getOrDefault(emotiontype,0));
+            totalcount += 1;
         }
+
+            LoveCountTV.setText(String.valueOf(map.getOrDefault("Love", 0)));
+            JoyCountTV.setText(String.valueOf(map.getOrDefault("Joy", 0)));
+            SurpriseCountTV.setText(String.valueOf(map.getOrDefault("Surprise", 0)));
+            AngerCountTV.setText(String.valueOf(map.getOrDefault("Anger", 0)));
+            SadnessCountTV.setText(String.valueOf(map.getOrDefault("Sadness", 0)));
+            FearCountTV.setText(String.valueOf(map.getOrDefault("Fear", 0)));
+            TotalCountTV.setText(String.valueOf(totalcount));
+
     }
 
     private void loadFromFile() {

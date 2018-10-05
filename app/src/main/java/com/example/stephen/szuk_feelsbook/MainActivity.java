@@ -1,3 +1,18 @@
+/*This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+
 package com.example.stephen.szuk_feelsbook;
 
 import android.content.Context;
@@ -10,6 +25,7 @@ import android.util.JsonReader;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -105,11 +121,16 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Add Comment", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //comment = CommentEditText.getText().toString();
-                Emotion emotion = new Emotion(CommentEditText.getText().toString());
-                emotion.setType(EmotionType);
-                elc.getEmotionList().add(emotion);
-                saveInFile();
+                comment = CommentEditText.getText().toString();
+                if (comment.length() > 100) {
+                    Toast.makeText(MainActivity.this, "Comment too long, emotion not added", Toast.LENGTH_LONG);
+                } else {
+                    Emotion emotion = new Emotion(CommentEditText.getText().toString());
+                    emotion.setType(EmotionType);
+                    elc.getEmotionList().add(emotion);
+                    saveInFile();
+
+                }
             }
         });
         builder.setNegativeButton("Add Without Comment", new DialogInterface.OnClickListener() {

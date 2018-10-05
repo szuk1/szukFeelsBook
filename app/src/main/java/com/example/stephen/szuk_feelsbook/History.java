@@ -99,7 +99,7 @@ public class History extends AppCompatActivity {
         //loads from specified file and stores into an arraylist of emotions located in the Emotion
         //list controller using gson library
         //This method and saveFromFile borrowed from lonelyTwitter lab assignment.
-        //See license file for licensing info
+
         try {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -124,7 +124,7 @@ public class History extends AppCompatActivity {
             //Saves the current emotionlist stored in the emotion list controller into the
             //specified file using Gson library
             //This method and loadFromFile borrowed from lonelyTwitter lab assignment.
-            //See license file for licensing info
+
 
             FileOutputStream fos = openFileOutput(FILENAME,
                     Context.MODE_PRIVATE);
